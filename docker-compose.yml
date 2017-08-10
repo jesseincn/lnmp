@@ -1,13 +1,12 @@
 version: '2'
 services:
   nginx:
-      restart: always #设置自启动
+      restart: always # 设置自启动
       image: hyt7212/nginx:1.10.3-alpine
-      ports:
-        - "80:80" #宿主端口（映射到）-》docker镜像端口
-        - "443:443" #宿主端口（映射到）-》docker镜像端口
-      volumes:
-        #配置文件宿主文件（映射到）-》docker镜像文件
+      ports: # 宿主端口（映射到）-》docker镜像端口
+        - "80:80" 
+        - "443:443"
+      volumes: # 配置文件宿主文件（映射到）-》docker镜像文件
         - ./nginx/nginx.conf:/etc/nginx/nginx.conf #nginx配置
         - ./nginx/fastcgi_params:/etc/nginx/fastcgi_params #fastcgi配置
         - ./nginx/sites-enabled:/etc/nginx/sites-enabled #站点配置
@@ -19,7 +18,7 @@ services:
         - "php70"
         - "mysql"
       # external_links:
-      container_name: nginx #docker镜像名称
+      container_name: nginx # docker镜像名称
   # php56:
   #     restart: always #设置自启动
   #     image: hyt7212/laravel-dev:5.6-fpm-alpine
@@ -39,7 +38,6 @@ services:
       container_name: php70
   mysql:
       restart: always #设置自启动
-      #build: ./mysql
       image: mysql:8.0.0
       ports:
         - "3306:3306"
@@ -51,7 +49,6 @@ services:
       container_name: mysql
   redis:
       restart: always #设置自启动
-      #build: ./redis
       image: redis:3.2.8-alpine #本地镜像
       volumes:
         - ../redis:/data #redis持久存储目录
@@ -60,4 +57,3 @@ services:
         - "6379:6379"
       command: redis-server /usr/local/etc/redis/redis.conf #redis持久存储
       container_name: redis
-      privileged: true #设定读写权限
