@@ -21,7 +21,7 @@ services:
       container_name: nginx # docker镜像名称
   # php56:
   #     restart: always #设置自启动
-  #     image: hyt7212/laravel-dev:5.6-fpm-alpine
+  #     image: hyt7212/php:5.6-fpm
   #     volumes:
   #       - ../www:/data/www #站点根目录
   #       - ./php/php.ini:/usr/local/etc/php/php.ini #配置文件
@@ -30,7 +30,7 @@ services:
   #     container_name: php56
   php70:
       restart: always #设置自启动
-      image: hyt7212/lwphp:7.0-xdebug
+      image: hyt7212/php:7.0-fpm-dev
       volumes:
         - ../www:/data/www #站点根目录
         - ./php70:/opt/config #配置文件
