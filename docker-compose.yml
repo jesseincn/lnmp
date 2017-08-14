@@ -16,7 +16,6 @@ services:
         - ../log/nginx:/data/log #nginx log目录
       links:
         - "php70"
-        - "mysql"
       # external_links:
       container_name: nginx # docker镜像名称
   # php56:
@@ -24,8 +23,8 @@ services:
   #     image: hyt7212/php:5.6-fpm
   #     volumes:
   #       - ../www:/data/www #站点根目录
-  #       - ./php/php.ini:/usr/local/etc/php/php.ini #配置文件
-  #       - ./php/php-fpm.conf:/usr/local/etc/php-fpm.conf #配置文件
+  #       - ./php56/php.ini:/usr/local/etc/php/php.ini #配置文件
+  #       - ./php56/php-fpm.conf:/usr/local/etc/php-fpm.conf #配置文件
   #       - ../log/php56:/opt/log/php #php log目录
   #     container_name: php56
   php70:
@@ -39,12 +38,12 @@ services:
       container_name: php70
   mysql:
       restart: always #设置自启动
-      image: mysql:8.0.0
+      image: mysql:5.7
       ports:
         - "3306:3306"
       volumes:
-        - ../mysql8:/var/lib/mysql #数据目录
-        - ./mysql8/my.cnf:/etc/mysql/my.cnf  #配置文件
+        - ../mysqlData:/var/lib/mysql #数据目录
+        - ./mysql/my.cnf:/etc/mysql/my.cnf  #配置文件
       environment:
         MYSQL_ROOT_PASSWORD: 123456
       container_name: mysql
