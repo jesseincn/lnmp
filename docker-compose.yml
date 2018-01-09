@@ -31,10 +31,9 @@ services:
       restart: always #设置自启动
       image: hyt7212/php:7.0-fpm-dev
       volumes:
+        - ./php70/base.ini:/usr/local/etc/php/conf.d/base.ini
+        - ./php70/dev.ini:/usr/local/etc/php/conf.d/dev.ini
         - ../www:/data/www #站点根目录
-        - ./php70/php.ini:/usr/local/etc/php/php.ini #配置文件
-        - ./php70/php-fpm.conf:/usr/local/etc/php-fpm.conf #配置文件
-        - ../log/php70:/opt/log/php #php log目录
       container_name: php70
   mysql:
       restart: always #设置自启动
