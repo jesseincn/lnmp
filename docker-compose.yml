@@ -12,8 +12,8 @@ services:
         - ./nginx/sites-enabled:/etc/nginx/sites-enabled #站点配置
         - ./nginx/certs:/etc/nginx/certs #ssl证书
         - ./nginx/logrotate.d:/etc/logrotate.d/ # 日志分割配置
-        - ../www:/data/www #站点根目录
         - ../log/nginx:/data/log #nginx log目录
+        - ../www/default:/data/www/default #站点根目录
       links:
         - "php70"
       # external_links:
@@ -33,7 +33,7 @@ services:
       volumes:
         - ./php70/base.ini:/usr/local/etc/php/conf.d/base.ini
         - ./php70/dev.ini:/usr/local/etc/php/conf.d/dev.ini
-        - ../www:/data/www #站点根目录
+        - ../www/default:/data/www/default #站点根目录
       container_name: php70
   mysql:
       restart: always #设置自启动
