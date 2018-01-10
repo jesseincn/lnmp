@@ -14,6 +14,7 @@ services:
         - ./nginx/logrotate.d:/etc/logrotate.d/ # 日志分割配置
         - ../log/nginx:/data/log #nginx log目录
         - ../www/default:/data/www/default #站点根目录
+        # - ../www/crm/code:/data/www/crm #CRM站点根目录
       links:
         - "php70"
       # external_links:
