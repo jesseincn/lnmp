@@ -16,7 +16,7 @@ server {
 
         include fastcgi_params;
         # fastcgi_pass   php56:9000;
-        fastcgi_pass   php70-crm:9000;
+        fastcgi_pass   php71-crm:9000;
         fastcgi_index  index.php;
         # fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
         fastcgi_param  SCRIPT_FILENAME  /data/www/public$fastcgi_script_name;

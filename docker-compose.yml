@@ -16,7 +16,7 @@ services:
         - ../www/default:/data/www/default #站点根目录
         # - ../www/crm/code:/data/www/crm #CRM站点根目录
       links:
-        - "php70"
+        - "php71"
       # external_links:
       container_name: nginx # docker镜像名称
   # php56:
@@ -28,14 +28,14 @@ services:
   #       - ./php56/php-fpm.conf:/usr/local/etc/php-fpm.conf #配置文件
   #       - ../log/php56:/opt/log/php #php log目录
   #     container_name: php56
-  php70:
+  php71:
       restart: always #设置自启动
-      image: hyt7212/php:7.0-fpm-dev
+      image: hyt7212/php:7.1-fpm-dev
       volumes:
-        - ./php70/base.ini:/usr/local/etc/php/conf.d/base.ini
-        - ./php70/dev.ini:/usr/local/etc/php/conf.d/dev.ini
+        - ./php71/base.ini:/usr/local/etc/php/conf.d/base.ini
+        - ./php71/dev.ini:/usr/local/etc/php/conf.d/dev.ini
         - ../www/default:/data/www/default #站点根目录
-      container_name: php70
+      container_name: php71
   mysql:
       restart: always #设置自启动
       image: mysql:5.7
