@@ -1,11 +1,18 @@
 version: '2'
 services:
+  data:
+      image: busybox
+      volumes:
+        - ../www/default:/data/www/default #默认站点根目录
+        # - ../www/crm/code:/data/www/crm #CRM站点根目录
   nginx:
       restart: always # 设置自启动
       image: hyt7212/nginx:1.10.3-alpine
       ports: # 宿主端口（映射到）-》docker镜像端口
         - "80:80" 
         - "443:443"
+      volumes_from:
+        - data
       volumes: # 配置文件宿主文件（映射到）-》docker镜像文件
         - ./nginx/nginx.conf:/etc/nginx/nginx.conf #nginx配置
         - ./nginx/fastcgi_params:/etc/nginx/fastcgi_params #fastcgi配置
@@ -13,8 +20,6 @@ services:
         - ./nginx/certs:/etc/nginx/certs #ssl证书
         - ./nginx/logrotate.d:/etc/logrotate.d/ # 日志分割配置
         - ../log/nginx:/data/log #nginx log目录
-        - ../www/default:/data/www/default #站点根目录
-        # - ../www/crm/code:/data/www/crm #CRM站点根目录
       links:
         - "php71"
       # external_links:
@@ -22,19 +27,19 @@ services:
   # php56:
   #     restart: always #设置自启动
   #     image: hyt7212/php:5.6-fpm
+  #     volumes_from:
+  #       - data
   #     volumes:
-  #       - ../www:/data/www #站点根目录
-  #       - ./php56/php.ini:/usr/local/etc/php/php.ini #配置文件
-  #       - ./php56/php-fpm.conf:/usr/local/etc/php-fpm.conf #配置文件
   #       - ../log/php56:/opt/log/php #php log目录
   #     container_name: php56
   php71:
       restart: always #设置自启动
       image: hyt7212/php:7.1-fpm-dev
+      volumes_from:
+        - data
       volumes:
         - ./php71/base.ini:/usr/local/etc/php/conf.d/base.ini
         - ./php71/dev.ini:/usr/local/etc/php/conf.d/dev.ini
-        - ../www/default:/data/www/default #站点根目录
       container_name: php71
   mysql:
       restart: always #设置自启动
