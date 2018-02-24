@@ -50,7 +50,7 @@ services:
         - ../mysqlData:/var/lib/mysql #数据目录
         - ./mysql/my.cnf:/etc/mysql/my.cnf  #配置文件
       environment:
-        MYSQL_ROOT_PASSWORD: 123456
+        MYSQL_ROOT_PASSWORD: kerlin
       container_name: mysql
   redis:
       restart: always #设置自启动
