@@ -6,7 +6,7 @@ services:
         - ../www/default:/data/www/default #默认站点根目录
   nginx:
       restart: always # 设置自启动
-      image: hyt7212/nginx:1.10.3-alpine
+      image: ikerlin/nginx:1.10.3-alpine
       ports: # 宿主端口（映射到）-》docker镜像端口
         - "80:80" 
         - "443:443"
@@ -34,7 +34,7 @@ services:
   #     container_name: php56
   php71:
       restart: always #设置自启动
-      image: hyt7212/php:7.1-fpm-dev
+      image: ikerlin/php:7.1-fpm-dev
       volumes_from:
         - data
       volumes:
