@@ -3,7 +3,7 @@ services:
   data:
       image: busybox
       volumes:
-        - ../www/default:/data/www/default #默认站点根目录
+        - ../www:/data/www # 站点根目录
   nginx:
       restart: always # 设置自启动
       image: ikerlin/nginx:1.10.3-alpine
@@ -19,14 +19,13 @@ services:
         - ./nginx/certs:/etc/nginx/certs #ssl证书
         - ./nginx/logrotate.d:/etc/logrotate.d/ # 日志分割配置
         - ../log/nginx:/data/log #nginx log目录
-        # - ../www/crm/code:/data/www/crm #CRM站点根目录
       links:
         - "php71"
       # external_links:
       container_name: nginx # docker镜像名称
   # php56:
   #     restart: always #设置自启动
-  #     image: hyt7212/php:5.6-fpm
+  #     image: ikerlin/php:5.6-fpm
   #     volumes_from:
   #       - data
   #     volumes:
