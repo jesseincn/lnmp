@@ -37,6 +37,7 @@ services:
       volumes_from:
         - data
       volumes:
+        - ../log/php71:/opt/log/php # php log目录
         - ./php71/fpm.conf:/usr/local/etc/php-fpm.d/fpm.conf
         - ./php71/base.ini:/usr/local/etc/php/conf.d/base.ini
         - ./php71/dev.ini:/usr/local/etc/php/conf.d/dev.ini
