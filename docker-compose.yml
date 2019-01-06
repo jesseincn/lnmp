@@ -41,6 +41,7 @@ services:
         - ./php71/www.conf:/usr/local/etc/php-fpm.d/www.conf
         - ./php71/base.ini:/usr/local/etc/php/conf.d/base.ini
         - ./php71/dev.ini:/usr/local/etc/php/conf.d/dev.ini
+        # - ./php71/supervisor.conf:/etc/supervisor/conf.d/supervisor.conf
       container_name: php71
   mysql:
       restart: always #设置自启动
