@@ -19,10 +19,10 @@ services:
         - ./nginx/certs:/etc/nginx/certs #ssl证书
         - ./nginx/logrotate.d:/etc/logrotate.d/ # 日志分割配置
         - ../log/nginx:/data/log #nginx log目录
+      container_name: nginx # docker镜像名称
       links:
         - "php71"
-      # external_links:
-      container_name: nginx # docker镜像名称
+      # network_mode: host # only Linux，启用时需要移除links连接，虚拟主机配置php反向代理使用127.0.0.1:9000
   # php56:
   #     restart: always #设置自启动
   #     image: ikerlin/php:5.6-fpm
@@ -34,6 +34,8 @@ services:
   php71:
       restart: always #设置自启动
       image: ikerlin/php:7.1-fpm-dev
+      # ports:
+      #   - "127.0.0.1:9000:9000" # only Linux，nginx使用host模式适用
       volumes_from:
         - data
       volumes:
