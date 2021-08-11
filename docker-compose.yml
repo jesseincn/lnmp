@@ -1,9 +1,10 @@
 version: '2'
+
 services:
   data:
       image: busybox
       volumes:
-        - ../www:/data/www # 站点根目录
+        - ~/Workspace/Projects/web:/data/www # 站点根目录
   nginx:
       restart: always # 设置自启动
       image: ikerlin/nginx:1.10.3-alpine
@@ -18,7 +19,7 @@ services:
         - ./nginx/sites-enabled:/etc/nginx/sites-enabled #站点配置
         - ./nginx/certs:/etc/nginx/certs #ssl证书
         - ./nginx/logrotate.d:/etc/logrotate.d/ # 日志分割配置
-        - ../log/nginx:/data/log #nginx log目录
+        - ./logs/nginx:/data/log #nginx log目录
       container_name: nginx # docker镜像名称
       links:
         - "php71"
@@ -39,7 +40,7 @@ services:
       volumes_from:
         - data
       volumes:
-        - ../log/php71:/opt/log/php # php log目录
+        - ./logs/php71:/opt/log/php # php log目录
         - ./php71/www.conf:/usr/local/etc/php-fpm.d/www.conf
         - ./php71/base.ini:/usr/local/etc/php/conf.d/base.ini
         - ./php71/dev.ini:/usr/local/etc/php/conf.d/dev.ini
@@ -51,7 +52,7 @@ services:
       ports:
         - "3306:3306"
       volumes:
-        - ../mysqlData:/var/lib/mysql #数据目录
+        - ./data/mysql:/var/lib/mysql #数据目录
         - ./mysql/my.cnf:/etc/mysql/my.cnf  #配置文件
       environment:
         MYSQL_ROOT_PASSWORD: kerlin
@@ -60,9 +61,10 @@ services:
       restart: always #设置自启动
       image: redis:3.2.8-alpine #本地镜像
       volumes:
-        - ../redis:/data #redis持久存储目录
+        - ./data/redis:/data #redis持久存储目录
         - ./redis/redis.conf:/usr/local/etc/redis/redis.conf #配置文件
       ports:
         - "6379:6379"
       command: redis-server /usr/local/etc/redis/redis.conf #redis持久存储
       container_name: redis
+      
